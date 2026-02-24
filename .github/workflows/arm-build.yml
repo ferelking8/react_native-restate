@@ -51,7 +51,7 @@ jobs:
       # add any additional build steps if necessary (e.g. expo publish/eas)
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-output
           path: web-build/
