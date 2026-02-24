@@ -9,21 +9,14 @@ on:
 
 jobs:
   build:
-    # runner is x86, but Node will be installed for arm64
+    # run everything inside an ARM64 container (QEMU emulation on x86 host)
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        architecture: [arm64]
+    container:
+      image: node:20
+      platform: linux/arm64
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          architecture: ${{ matrix.architecture }}
-          cache: 'npm'       # built-in caching for node_modules
 
       - name: Restore additional caches
         uses: actions/cache@v3
@@ -48,7 +41,7 @@ jobs:
       - name: Build web bundle
         run: npm run build
 
-      # add any additional build steps if necessary (e.g. expo publish/eas)
+      # extra build steps can go here
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
