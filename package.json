@@ -8,7 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build": "expo build:web --non-interactive",
+    "build": "CI=1 expo export:web",
     "test": "jest --watchAll",
     "lint": "expo lint"
   },
