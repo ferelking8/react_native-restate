@@ -16,6 +16,13 @@ export default function RootLayout() {
     "Rubik-SemiBold": require("../assets/fonts/Rubik-SemiBold.ttf"),
   });
 
+  // keep splash screen visible until we explicitly hide it
+  useEffect(() => {
+    SplashScreen.preventAutoHideAsync().catch(() => {
+      /* expo may warns about already preventing */
+    });
+  }, []);
+
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -23,6 +30,7 @@ export default function RootLayout() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
+    // still loading, render nothing so splash remains
     return null;
   }
 

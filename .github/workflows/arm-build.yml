@@ -28,11 +28,3 @@ jobs:
 
       - name: Run tests
         run: npm run test
-
-      - name: Log in to Expo/EAS
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: npx eas login --token "$EXPO_TOKEN"
-
-      - name: Build Android via EAS
-        run: npx eas build --platform android --non-interactive
